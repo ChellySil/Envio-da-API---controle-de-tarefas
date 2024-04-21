@@ -1,26 +1,29 @@
 package com.example.demo.models;
 
-import org.hibernate.annotations.ManyToAny;
+//import org.hibernate.annotations.ManyToAny;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
+//import jakarta.persistence.Column;
+//import jakarta.persistence.Entity;
+//import jakarta.persistence.GeneratedValue;
+//import jakarta.persistence.GenerationType;
+//import jakarta.persistence.Id;
+//import jakarta.persistence.JoinColumn;
+//import jakarta.persistence.ManyToOne;
 import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.NotNull;
+//import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.NonNull;
 
-@Entity
-@Table(name = "tarefa")
+// coisas do neo4j
+import org.springframework.data.neo4j.core.schema.GeneratedValue;
+import org.springframework.data.neo4j.core.schema.Id;
+import org.springframework.data.neo4j.core.schema.Node;
+@NoArgsConstructor
+@Data
+@Node("tarefas")
 public class Tarefa {
-
-    public Tarefa(){
-
-    }
 
     public Tarefa(Long id, String descricao){
      this.id = id;
@@ -28,34 +31,11 @@ public class Tarefa {
     }
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id", unique = true, nullable = false)
+    @GeneratedValue
     private Long id;
 
-   
-    @Column(name = "descricao", length = 400)
     @NotEmpty
-    @NotNull
+    @NonNull
     @Size(min = 2, max= 400)
     private String descricao;
-
-
-
-    public String getDescricao() {
-     return descricao;
-    }
-    
-
-    public void setDescricao(String descricao) {
-     this.descricao = descricao;
-    }
-
-    public Long getId() {
-     return id;
-    }
-
-    public void setId(Long id) {
-     this.id = id;
-    }
-
 }

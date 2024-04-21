@@ -1,7 +1,7 @@
 package com.example.demo.controllers;
 
 import java.util.List;
-import java.util.function.Supplier;
+//import java.util.function.Supplier;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,10 +14,13 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.models.Tarefa;
 import com.example.demo.repositories.TarefaRepository;
-import com.example.demo.repositories.erros.TaskNotFoundException;
+//import com.example.demo.repositories.erros.TaskNotFoundException;
+
+import lombok.AllArgsConstructor;
 
 @RestController
-@RequestMapping("/tarefas")
+@RequestMapping("/api/tarefas")
+@AllArgsConstructor
 public class TarefaController {
 	
 @Autowired
