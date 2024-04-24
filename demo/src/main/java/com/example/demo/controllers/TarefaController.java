@@ -46,6 +46,20 @@ private TarefaRepository tarefa;
 		tarefa.setDescricao(tarefaDetalhes.getDescricao());
 		return this.tarefa.save(tarefa);
 	}
+
+	@DeleteMapping("/{id}")
+   public ResponseEntity<Void> deletarTarefa(@PathVariable Long id) {
+    Tarefa tarefa = tarefa.findById(id).orElseThrow();
+    if (tarefa.possuiDependencias()) {
+        return ResponseEntity.badRequest().build();
+    }
+
+    tarefa.removerDependencias();
+
+    tarefa.delete();
+
+    return ResponseEntity.noContent().build();
+}
 	
 	
 }
