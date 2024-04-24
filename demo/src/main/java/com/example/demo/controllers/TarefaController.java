@@ -48,15 +48,11 @@ private TarefaRepository tarefa;
 	}
 
 	@DeleteMapping("/{id}")
-   public ResponseEntity<Void> deletarTarefa(@PathVariable Long id) {
-    Tarefa tarefa = tarefa.findById(id).orElseThrow();
-    if (tarefa.possuiDependencias()) {
-        return ResponseEntity.badRequest().build();
-    }
+public ResponseEntity<Void> deletarTarefa(@PathVariable Long id) {
+    Tarefa tarefa = tarefaRepository.findById(id).orElseThrow(() -> new TarefaNotFoundException(id));
 
-    tarefa.removerDependencias();
-
-    tarefa.delete();
+    tarefa.setAtivo(false); 
+    tarefaRepository.save(tarefa);
 
     return ResponseEntity.noContent().build();
 }
