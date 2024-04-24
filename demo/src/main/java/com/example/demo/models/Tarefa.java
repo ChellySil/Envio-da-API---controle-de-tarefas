@@ -30,6 +30,11 @@ public class Tarefa {
      this.descricao = descricao;
     }
 
+
+    public boolean possuiDependencias() {
+        List<Tarefa> tarefasDependentes = tarefaRepository.findByDependenteId(getId());
+        return !tarefasDependentes.isEmpty();
+    }
     @Id
     @GeneratedValue
     private Long id;
